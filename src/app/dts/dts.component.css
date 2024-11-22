@@ -1,0 +1,445 @@
+/* Hide navigation buttons and align hamburger menu to the corner on mobile */
+@media (max-width: 768px) {
+  .nav-buttons-column,
+  .buttons-column {
+    display: none;
+  }
+
+  .menu-hamburger-column {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .header-content {
+    padding-right: 60px; /* Adjust to give space for the hamburger button */
+  }
+}
+
+/* General toolbar styling */
+ion-toolbar {
+  --background: white;
+  padding: 0 16px;
+}
+
+.header-content {
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.logo-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+
+.nav-button {
+  --color: #ff6600;
+  font-weight: bold;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.login-button {
+  background-color: white !important;
+  color: #ff6600 !important;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #ff6600;
+}
+
+.start-button {
+  background-color: #ff6600 !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+/* Hide hamburger menu on larger screens */
+@media (min-width: 769px) {
+  .menu-hamburger-column {
+    display: none !important;
+  }
+}
+
+/* Estilos para el menú hamburguesa */
+.menu-button {
+  --color: #ff6600;
+  font-size: 24px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #ff6600;
+  padding: 8px;
+}
+
+/* Estilos para el título del menú */
+ion-menu[menuId="first"] ion-toolbar {
+  background-color: #ff6600;
+  color: white;
+}
+
+ion-menu[menuId="first"] ion-title {
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+/* Estilos para el contenedor de los elementos del menú desplegable */
+ion-menu[menuId="first"] ion-list {
+  margin-top: 1rem;
+  border-radius: 12px; /* Bordes redondeados del contenedor */
+  overflow: hidden; /* Asegura que los elementos internos respeten el borde redondeado */
+}
+
+/* Estilos para los elementos del menú desplegable */
+ion-menu[menuId="first"] ion-item {
+  --background: #ff6600; /* Fondo naranja */
+  --color: white; /* Texto blanco */
+  font-size: 18px;
+  padding: 12px;
+  margin: 8px 16px;
+  border-radius: 8px;
+  --inner-border-width: 0;
+  --border-radius: 8px; /* Bordes redondeados de cada elemento */
+}
+
+/* Cambios en el color de la flecha */
+ion-menu[menuId="first"] ion-item ion-icon {
+  color: white; /* Flecha en color blanco */
+}
+
+/* Hover en los elementos del menú */
+ion-menu[menuId="first"] ion-item:hover {
+  --background: #ff3300; /* Fondo más oscuro al hacer hover */
+  --color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+ion-menu[menuId="first"] ion-item button {
+  --color: inherit;
+  font-weight: bold;
+}
+
+/* Espaciado entre los elementos del menú */
+ion-menu[menuId="first"] ion-item:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+/* Mejora de la animación de cierre del menú */
+ion-menu {
+  --width: 250px;
+}
+
+ion-menu[menuId="first"] ion-content {
+  --background: white;
+  padding: 8px;
+}
+
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.text-content {
+  max-width: 50%;
+}
+
+h1 {
+  color: #ff6600;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+p {
+  color: #333;
+  font-size: 18px;
+}
+
+.register-button {
+  margin-top: 20px;
+  --background:  #ff6600;
+  --color: white;
+}
+
+.image-content img {
+  max-width: 80%;
+  border-radius: 10px;
+  margin-left: 80px;
+}
+
+.how-it-works {
+  text-align: center;
+
+
+  padding: 20px;
+  background-color: #ff6600;
+  color: white;
+}
+
+.how-it-works h2 {
+  font-size: 24px;
+}
+
+.how-it-works p {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.button-primary {
+  border-radius: 50px;
+  font-size: 14px;
+}
+
+.button-secondary {
+  font-size: 14px;
+}
+
+
+ion-footer {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons {
+  margin-bottom: 10px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.privacy-links a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #ff6600;
+}
+
+/* Asegúrate de que el contenido principal no esté detrás del footer */
+ion-content {
+    padding-bottom: 60px; /* Espacio suficiente para que el contenido no quede detrás del footer */
+  --background: #ffffff; /* Fondo blanco */
+}
+
+
+  .filters-container {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .range-filters {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+  }
+
+
+
+.gradient-text {
+    font-size: 48px; /* Ajusta el tamaño de la fuente según sea necesario */
+    font-weight: bold; /* Ajusta el peso de la fuente */
+    background: linear-gradient(90deg, #fffdfc, #aa580c); /* Degradado de izquierda a derecha */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+
+ h1 {
+            color: #ff6600;
+            font-size: 24px;
+        }
+
+      /* Contenedor principal que contiene ambos lados */
+        .filters-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        /* Estilos para los filtros de la izquierda */
+        .left-filters {
+            flex: 3;
+        }
+
+        /* Estilos para los filtros de la derecha */
+        .right-filters {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-right: 20px;
+        }
+
+        .right-filters input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #ff6600;
+        }
+
+        input::placeholder {
+            color: white;
+        }
+
+        /* Estilos generales para los botones y los filtros */
+        .filters-container ion-segment-button {
+            background-color: #ff6600;
+            color: white;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        /* Colores para los rangos */
+        ion-range {
+            --bar-background: #ff6600;
+            --bar-background-active: #ff6600;
+            --knob-background: white;
+            --pin-background: #ff6600;
+            --pin-text-color: white;
+        }
+
+        /* Personalización de los títulos de los filtros */
+        .range-filters ion-label {
+            color: #ff6600;
+            font-weight: bold;
+        }
+
+
+/* Estilos para las tarjetas de jugadores */
+.players-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.player-card {
+    background-color: #ff6600;
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 450px; /* Asegura la altura mínima igual para todas */
+        margin-bottom: 100px;
+}
+
+.player-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.player-info {
+    text-align: left;
+    width: 100%;
+}
+
+.player-info h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.player-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.player-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.player-actions a {
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48%; /* Asegura que los botones tengan el mismo tamaño */
+}
+
+.player-actions a i {
+    margin-right: 5px;
+}
+
+
+
+ .boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #ff6600; /* Fondo del contenedor */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del contenedor */
+    max-width: 320px;
+    margin: 10px auto;
+    width: 100%;
+  }
+
+  .boton ion-select {
+    --placeholder-color: #999; /* Color del texto del placeholder */
+    --color: #333; /* Color del texto normal */
+    --padding-start: 10px; /* Padding a la izquierda */
+    --background: #fff; /* Fondo blanco */
+    --border-radius: 8px; /* Bordes redondeados */
+    --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra de la caja */
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .boton ion-select .select-icon {
+    color: #ff6600; /* Color del icono del select */
+  }
+
+  .boton ion-select .select-text {
+    color: #333; /* Color del texto dentro del select */
+  }

@@ -1,0 +1,122 @@
+<!--
+
+<ion-content id="main-content" class="content-background">
+
+  <div class="form-container">
+
+    <ion-input
+      [(ngModel)]="email"
+      type="email"
+      placeholder="Correo"
+      class="input-field"
+    ></ion-input>
+
+
+    <ion-input
+      [(ngModel)]="password"
+      type="password"
+      placeholder="Contraseña"
+      class="input-field"
+    ></ion-input>
+
+    <ion-button
+      expand="full"
+      (click)="loginWithEmail()"
+      class="button-orange"
+    >
+      Iniciar Sesión con Email
+    </ion-button>
+  </div>
+
+
+  <div class="button-container">
+
+    <ion-button
+      expand="full"
+      (click)="loginWithGoogle()"
+      class="button-orange"
+    >
+      Iniciar Sesión con Google
+    </ion-button>
+  </div>
+
+
+  <div class="button-container">
+    <ion-button
+      expand="full"
+      [routerLink]="['/register']"
+      class="button-orange"
+    >
+      Ir al Registro
+    </ion-button>
+  </div>
+
+
+</ion-content> -->
+
+
+
+
+
+
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title class="ion-text-center custom-title">Iniciá sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login-container">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <img src="../../assets/icon/70c6a3b2-eab6-49bf-bb62-5941d24c60f7.jfif" class="logo-img" alt="Logo de tu empresa">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+
+
+
+
+
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button expand="block" (click)="loginWithGoogle()">Ingresar</ion-button>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="block" class="google-button" (click)="loginWithGoogle()">
+          <img src="../../assets/icon/google.svg" class="icon"/>
+          Continuar con Google
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <p>¿No tenés cuenta? <a [routerLink]="['/register']">Creala ahora</a></p>
+      </ion-col>
+    </ion-row>
+
+
+ <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <p>
+          Al iniciar sesión, aceptas nuestros
+          <a href="https://imawinterminos.vercel.app/" target="_blank">Términos y Condiciones</a>
+        </p>
+      </ion-col>
+    </ion-row>
+
+
+
+
+  </ion-grid>
+
+</ion-content>
+

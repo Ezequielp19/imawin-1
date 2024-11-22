@@ -1,0 +1,7 @@
+{
+  "name": "inawin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,333 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="header-content ion-align-items-center">
+        <!-- Logo -->
+        <ion-col size="12" size-md="3" class="logo-column">
+          <ion-button fill="clear" (click)="navigateTo('home')" class="logo-button">
+            <img src="../../assets/icon/70c6a3b2-eab6-49bf-bb62-5941d24c60f7.jfif" alt="logo" class="logo" />
+          </ion-button>
+        </ion-col>
+
+        <!-- Navigation buttons (hidden on mobile) -->
+        <ion-col size="12" size-md="6" class="nav-buttons-column">
+          <ion-buttons class="nav-buttons">
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('Jugadores')">Jugadores</ion-button>
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('managers')">Representantes</ion-button>
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('clubes')">Clubes</ion-button>
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('dts')">DT</ion-button>
+          </ion-buttons>
+        </ion-col>
+
+        <!-- Login and Register buttons (hidden on mobile) -->
+        <ion-col size="12" size-md="3" class="buttons-column">
+          <ion-buttons class="buttons-container">
+                 <ion-button fill="clear" (click)="logout()" class="logout-button">Cerrar sesión</ion-button>
+            <ion-button (click)="navigateTo('home')" class="start-button">FAQ</ion-button>
+          </ion-buttons>
+        </ion-col>
+
+        <!-- Hamburger menu (only visible on mobile) -->
+        <ion-col size="12" class="menu-hamburger-column">
+          <ion-menu-button auto-hide="false" class="menu-button"></ion-menu-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Sidebar menu -->
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item button (click)="navigateTo('Jugadores')">Jugadores</ion-item>
+      <ion-item button (click)="navigateTo('managers')">Representantes</ion-item>
+      <ion-item button (click)="navigateTo('clubes')">Clubes</ion-item>
+      <ion-item button (click)="navigateTo('dts')">DT</ion-item>
+      <!-- <ion-item button (click)="navigateTo('perfil')">Perfil</ion-item> -->
+      <ion-item button (click)="navigateTo('q&a')">Faq</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ng-container *ngIf="userProfileData">
+<ion-content id="main-content">
+  <div *ngIf="userProfileData.tipo_usuario === 'player'">
+    <div class="how-it-works">
+      <h1 class="gradient-text">Perfil Jugador</h1>
+    </div>
+
+    <div class="player-profile">
+      <!-- Left Column -->
+      <div class="left-column">
+        <img
+          [src]="userProfileData.profilePhotoUrl"
+          alt="Perfil jugador"
+          class="player-image"
+        />
+        <div class="player-basic-info">
+          <p><strong>Edad:</strong> {{ userProfileData.age }}</p>
+          <p><strong>Nacionalidad:</strong> {{ userProfileData.country }}</p>
+          <p><strong>Provincia:</strong> {{ userProfileData.province }}</p>
+          <p><strong>Ciudad:</strong> {{ userProfileData.city }}</p>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="right-column">
+        <!-- Ion Segment -->
+        <ion-segment (ionChange)="onSegmentChange($event)" value="info">
+          <ion-segment-button value="info">
+            <ion-label>Información</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="videos">
+            <ion-label>Videos</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <!-- Contenido dinámico basado en el segmento activo -->
+        <div *ngIf="activeSegment === 'info'">
+          <div class="player-details">
+            <h3>{{ userProfileData.playerName }}</h3>
+            <p><strong>Posición principal:</strong> {{ userProfileData.position }}</p>
+            <p><strong>Altura:</strong> {{ userProfileData.height }}</p>
+            <p><strong>Pierna hábil:</strong> {{ userProfileData.footPreference }}</p>
+          </div>
+
+          <div class="player-section">
+            <h3>Perfil personal</h3>
+            <p>Descripción como jugador: {{ userProfileData.detalle }}</p>
+            <p>Años de experiencia: {{ userProfileData.yearsOfExperience }}</p>
+          </div>
+
+          <div class="player-section">
+            <h3>Actualidad</h3>
+            <p><strong>Equipo actual:</strong> {{ userProfileData.currentClub }}</p>
+            <p><strong>Último equipo:</strong> {{ userProfileData.lastClub }}</p>
+            <p>
+              <strong>Video de presentación:</strong>
+              <a [href]="userProfileData.videoLink" target="_blank">{{ userProfileData.videoLink }}</a>
+            </p>
+          </div>
+
+          <div class="player-buttons">
+            <ion-button fill="solid" style="background-color: #e9f1ef;" color="orange">Compartir</ion-button>
+            <ion-button fill="outline" color="orange" style="background-color: #ebe6e3;">Contactar</ion-button>
+          </div>
+        </div>
+
+<!-- Segmento de Videos -->
+<div *ngIf="activeSegment === 'videos'" class="player-videos">
+  <h3>Videos del Jugador</h3>
+
+  <!-- Lista de Videos -->
+  <ion-card *ngFor="let video of playerVideos" class="video-card">
+    <ion-card-header>
+      <ion-card-title>{{ video.title }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>{{ video.description }}</p>
+      <iframe
+        [src]="video.safeUrl"
+        width="100%"
+        height="315"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para agregar un nuevo video -->
+  <ion-button expand="full" color="primary" (click)="isVideoFormOpen = !isVideoFormOpen">
+    {{ isVideoFormOpen ? 'Ocultar Formulario' : 'Agregar Nuevo Video' }}
+  </ion-button>
+
+  <!-- Formulario de Videos -->
+  <div *ngIf="isVideoFormOpen" class="video-form-container">
+    <form [formGroup]="videoForm" (ngSubmit)="addVideo()">
+      <ion-item>
+        <ion-label position="stacked">Título</ion-label>
+        <ion-input formControlName="title" placeholder="Ingresa el título"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-textarea formControlName="description" placeholder="Ingresa una descripción"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Link de Video</ion-label>
+        <ion-input formControlName="videoLink" placeholder="Ingresa el enlace"></ion-input>
+      </ion-item>
+      <div class="form-actions">
+        <ion-button expand="full" color="success" type="submit" [disabled]="videoForm.invalid">
+          Guardar Video
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div *ngIf="userProfileData.tipo_usuario === 'club'">
+    <div class="how-it-works">
+      <h1 class="gradient-text">Perfil Club</h1>
+    </div>
+
+    <div class="player-profile"> <!-- Clase "player-profile" para mantener el estilo y estructura -->
+      <div class="left-column">
+        <img
+          [src]="userProfileData.profilePhotoUrl"
+          alt="Perfil club"
+          class="player-image"
+        />
+        <div class="player-basic-info"> <!-- Clase "player-basic-info" para consistencia -->
+          <p><strong>Nombre del Club:</strong> {{ userProfileData.nombre }}</p>
+          <p><strong>País:</strong> {{ userProfileData.country }}</p>
+          <p><strong>Provincia:</strong> {{ userProfileData.province }}</p>
+          <p><strong>Año de fundación:</strong> {{ userProfileData.fundacion }}</p>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="player-details"> <!-- Clase "player-details" para consistencia -->
+          <h3>{{ userProfileData.nombre }}</h3>
+          <p><strong>Descripción:</strong> {{ userProfileData.detalle }}</p>
+        </div>
+
+        <div class="player-section"> <!-- Clase "player-section" para mantener el estilo -->
+          <h3>Información de Contacto</h3>
+          <p><strong>Instagram:</strong> <a [href]="userProfileData.instagram" target="_blank">{{ userProfileData.instagram }}</a></p>
+          <p><strong>Facebook:</strong> <a [href]="userProfileData.facebook" target="_blank">{{ userProfileData.facebook }}</a></p>
+          <p><strong>Sitio Web:</strong> <a [href]="userProfileData.website" target="_blank">{{ userProfileData.website }}</a></p>
+        </div>
+
+        <div class="player-buttons"> <!-- Clase "player-buttons" para consistencia en los botones -->
+          <ion-button fill="solid" style="background-color: #e9f1ef;" color="orange">Compartir</ion-button>
+          <ion-button fill="outline" color="orange" style="background-color: #ebe6e3;">Contactar</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="userProfileData.tipo_usuario === 'dt'">
+    <div class="how-it-works">
+      <h1 class="gradient-text">Perfil Director Técnico</h1>
+    </div>
+
+    <div class="player-profile"> <!-- Clase "player-profile" para mantener el estilo y estructura -->
+      <div class="left-column">
+        <img
+          [src]="userProfileData.profilePhotoUrl"
+          alt="Perfil director técnico"
+          class="player-image"
+        />
+        <div class="player-basic-info"> <!-- Clase "player-basic-info" para consistencia -->
+          <p><strong>Estado:</strong> {{ userProfileData.dt }}</p>
+          <p><strong>Edad:</strong> {{ userProfileData.age }}</p>
+          <p><strong>País:</strong> {{ userProfileData.country }}</p>
+          <p><strong>Provincia:</strong> {{ userProfileData.province }}</p>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="player-details"> <!-- Clase "player-details" para consistencia -->
+          <h3>{{ userProfileData.playerName }}</h3>
+          <p><strong>Estilo de juego:</strong> {{ userProfileData.gusto }}</p>
+          <p><strong>Altura:</strong> {{ userProfileData.height }} cm</p>
+        </div>
+
+        <div class="player-section"> <!-- Clase "player-section" para mantener el estilo -->
+          <h3>Experiencia</h3>
+          <p><strong>Años de experiencia:</strong> {{ userProfileData.yearsOfExperience }}</p>
+          <p><strong>Último club dirigido:</strong> {{ userProfileData.lastClub }}</p>
+          <p><strong>Club actual:</strong> {{ userProfileData.currentClub }}</p>
+        </div>
+
+        <div class="player-buttons"> <!-- Clase "player-buttons" para consistencia en los botones -->
+          <ion-button fill="solid" style="background-color: #e9f1ef;" color="orange">Compartir</ion-button>
+          <ion-button fill="outline" color="orange" style="background-color: #ebe6e3;">Contactar</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="userProfileData.tipo_usuario === 'manager'">
+    <div class="how-it-works">
+      <h1 class="gradient-text">Perfil Manager</h1>
+    </div>
+
+    <div class="player-profile"> <!-- Clase "player-profile" para mantener el estilo y estructura -->
+      <div class="left-column">
+        <img
+          [src]="userProfileData.profilePhotoUrl"
+          alt="Perfil manager"
+          class="player-image"
+        />
+        <div class="player-basic-info"> <!-- Clase "player-basic-info" para consistencia -->
+          <p><strong>Estado:</strong> {{ userProfileData.manager }}</p>
+          <p><strong>Edad:</strong> {{ userProfileData.age }}</p>
+          <p><strong>País:</strong> {{ userProfileData.country }}</p>
+          <p><strong>Provincia:</strong> {{ userProfileData.province }}</p>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="player-details"> <!-- Clase "player-details" para consistencia -->
+          <h3>{{ userProfileData.playerName }}</h3>
+          <p><strong>Clientes actuales:</strong> {{ userProfileData.currentClub }}</p>
+          <p><strong>Último cliente:</strong> {{ userProfileData.lastClub }}</p>
+        </div>
+
+        <div class="player-section"> <!-- Clase "player-section" para mantener el estilo -->
+          <h3>Experiencia</h3>
+          <p><strong>Años de experiencia:</strong> {{ userProfileData.yearsOfExperience }}</p>
+          <p><strong>Experiencia en el campo:</strong> {{ userProfileData.detalle }}</p>
+        </div>
+
+        <div class="player-buttons"> <!-- Clase "player-buttons" para consistencia en los botones -->
+          <ion-button fill="solid" style="background-color: #e9f1ef;" color="orange">Compartir</ion-button>
+          <ion-button fill="outline" color="orange" style="background-color: #ebe6e3;">Contactar</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+
+  <ion-footer>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#" target="_blank"><i class="fab fa-twitter fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-youtube fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin fa-2x" style="color: #ff6600;"></i></a>
+      </div>
+
+      <div class="privacy-links">
+        <a href="https://imawinterminos.vercel.app/" style="color: #ff6600;">Políticas de privacidad</a>
+        <br>
+        <a href="https://imawinterminos.vercel.app/" style="color: #ff6600;">Términos y condiciones</a>
+      </div>
+    </div>
+  </ion-footer>
+</ion-content>
+</ng-container>

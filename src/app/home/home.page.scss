@@ -1,0 +1,567 @@
+/* Hide navigation buttons and align hamburger menu to the corner on mobile */
+@media (max-width: 768px) {
+  .nav-buttons-column,
+  .buttons-column {
+    display: none;
+  }
+
+  .menu-hamburger-column {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .header-content {
+    padding-right: 60px; /* Adjust to give space for the hamburger button */
+  }
+}
+
+/* General toolbar styling */
+ion-toolbar {
+  --background: white;
+  padding: 0 16px;
+}
+
+.header-content {
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.logo-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+
+.nav-button {
+  --color: #ff6600;
+  font-weight: bold;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.login-button {
+  background-color: white !important;
+  color: #ff6600 !important;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #ff6600;
+}
+
+.start-button {
+  background-color: #ff6600 !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+/* Hide hamburger menu on larger screens */
+@media (min-width: 769px) {
+  .menu-hamburger-column {
+    display: none !important;
+  }
+}
+
+/* Estilos para el menú hamburguesa */
+.menu-button {
+  --color: #ff6600;
+  font-size: 24px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #ff6600;
+  padding: 8px;
+}
+
+/* Estilos para el título del menú */
+ion-menu[menuId="first"] ion-toolbar {
+  background-color: #ff6600;
+  color: white;
+}
+
+ion-menu[menuId="first"] ion-title {
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+/* Estilos para el contenedor de los elementos del menú desplegable */
+ion-menu[menuId="first"] ion-list {
+  margin-top: 1rem;
+  border-radius: 12px; /* Bordes redondeados del contenedor */
+  overflow: hidden; /* Asegura que los elementos internos respeten el borde redondeado */
+}
+
+/* Estilos para los elementos del menú desplegable */
+ion-menu[menuId="first"] ion-item {
+  --background: #ff6600; /* Fondo naranja */
+  --color: white; /* Texto blanco */
+  font-size: 18px;
+  padding: 12px;
+  margin: 8px 16px;
+  border-radius: 8px;
+  --inner-border-width: 0;
+  --border-radius: 8px; /* Bordes redondeados de cada elemento */
+}
+
+/* Cambios en el color de la flecha */
+ion-menu[menuId="first"] ion-item ion-icon {
+  color: white; /* Flecha en color blanco */
+}
+
+/* Hover en los elementos del menú */
+ion-menu[menuId="first"] ion-item:hover {
+  --background: #ff3300; /* Fondo más oscuro al hacer hover */
+  --color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+ion-menu[menuId="first"] ion-item button {
+  --color: inherit;
+  font-weight: bold;
+}
+
+/* Espaciado entre los elementos del menú */
+ion-menu[menuId="first"] ion-item:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+/* Mejora de la animación de cierre del menú */
+ion-menu {
+  --width: 250px;
+}
+
+ion-menu[menuId="first"] ion-content {
+  --background: white;
+  padding: 8px;
+}
+
+
+
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.text-content {
+  max-width: 50%;
+}
+
+h1 {
+  color: #ff6600;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+p {
+  color: #333;
+  font-size: 18px;
+}
+
+.register-button {
+  margin-top: 20px;
+  --background:  #ff6600;
+  --color: white;
+}
+
+.image-content img {
+  max-width: 80%;
+  border-radius: 10px;
+  margin-left: 80px;
+}
+
+.how-it-works {
+  text-align: center;
+
+  // margin-top: 40px;
+  padding: 20px;
+  background-color: #ff6600;
+  color: white;
+}
+
+.how-it-works h2 {
+  font-size: 24px;
+}
+
+.how-it-works p {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.button-primary {
+  border-radius: 50px;
+  font-size: 14px;
+}
+
+.button-secondary {
+  font-size: 14px;
+}
+
+
+.footballer-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.footballer-profile .text-content {
+  max-width: 50%;
+}
+
+.footballer-profile h2 {
+  color: #ff6600;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.footballer-profile p {
+  color: #333;
+  font-size: 18px;
+}
+
+.footballer-profile .register-button {
+  margin-top: 20px;
+  --background: #ff6600;
+  --color: white;
+}
+
+.footballer-profile .image-content img {
+  max-width: 80%;
+  border-radius: 10px;
+  margin-left: 80px;
+}
+
+.footballer-profile, .agent-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  // margin-top: 20px;
+}
+
+.footballer-profile .text-content, .agent-profile .text-content {
+  max-width: 50%;
+}
+
+.footballer-profile h2, .agent-profile h2 {
+  color: #ff6600;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.footballer-profile p, .agent-profile p {
+  color: #333;
+  font-size: 18px;
+}
+
+.footballer-profile .register-button, .agent-profile .register-button {
+  margin-top: 20px;
+  --background: #ff6600;
+  --color: white;
+}
+
+.footballer-profile .image-content img, .agent-profile .image-content img {
+  max-width: 80%;
+  border-radius: 10px;
+  margin-left: 80px;
+}
+
+
+
+.agent-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ff6600; /* Fondo naranja completo */
+  // margin-top: 20px;
+  // border-radius: 10px;
+  color: white; /* Para que el texto se vea bien */
+}
+
+/* Ajustes del texto dentro de la sección de agente */
+.agent-profile .text-content {
+  max-width: 50%;
+}
+
+.agent-profile h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.agent-profile p {
+  font-size: 18px;
+}
+
+/* Ajustes del botón */
+.agent-profile .register-button {
+  margin-top: 20px;
+  --background: white;
+  --color: #ff6600;
+}
+
+/* Estilos para la imagen, haciendo que sea más grande */
+.agent-profile .image-content img {
+  max-width: 100%; /* Hacemos que la imagen ocupe el 100% de su contenedor */
+  height: auto;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 120px;
+}
+
+
+ion-footer {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-icons {
+    margin-bottom: 10px;
+  }
+
+  .social-icons a {
+    margin: 0 10px;
+    text-decoration: none;
+  }
+
+  .privacy-links a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #ff6600;
+  }
+
+
+ion-title {
+  font-weight: bold;
+}
+
+.progress-bar {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-number {
+  background-color: #ff8c00;
+  border-radius: 50%;
+  color: white;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.step-title {
+  font-size: 12px;
+}
+
+.step.active .step-number {
+  background-color: #ff6500;
+}
+
+.btn-wrapper {
+  margin-top: 20px;
+}
+
+ion-button {
+  // --background: linear-gradient(to bottom, #ff8c00, #ff6500);
+  color: white;
+}
+
+
+.profile-selection {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en una columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  justify-content: center; /* Centra los elementos verticalmente */
+  height: 100vh; /* Hace que el contenedor ocupe toda la altura de la vista */
+  background-color: aliceblue; /* Color de fondo */
+}
+
+
+
+
+
+
+
+/* Breakpoints */
+@media (max-width: 1200px) {
+  .text-content, .image-content img {
+    max-width: 60%;
+  }
+
+  h1, h2 {
+    font-size: 32px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+
+
+
+
+
+
+
+
+}
+
+@media (max-width: 992px) {
+  .text-content, .image-content img {
+    max-width: 70%;
+  }
+
+  .hero, .footballer-profile, .agent-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  h1, h2 {
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .register-button {
+    width: 100%;
+  }
+
+  .image-content img {
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-content, .image-content img {
+    max-width: 80%;
+  }
+
+  h1, h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .register-button {
+    width: 100%;
+  }
+
+  .hero, .footballer-profile, .agent-profile {
+    padding: 10px;
+  }
+
+  ion-toolbar {
+    padding: 10px;
+  }
+
+
+
+
+
+}
+
+@media (max-width: 576px) {
+  .text-content, .image-content img {
+    max-width: 90%;
+  }
+
+  h1, h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  .register-button {
+    width: 100%;
+  }
+
+  .hero, .footballer-profile, .agent-profile {
+    padding: 5px;
+  }
+
+  ion-footer {
+    padding: 10px;
+  }
+
+  ion-button {
+     font-size: 12px; /* Reducir el tamaño del texto */
+     padding: 5px; /* Ajustar el padding */
+   }
+
+   ion-toolbar {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 0 10px; /* Reducir padding */
+   }
+
+   .logo {
+     width: 50px; /* Ajustar tamaño del logo */
+     margin-left: 10px; /* Reducir margen */
+   }
+
+   .nav-button {
+     font-size: 12px; /* Reducir el tamaño de texto en botones */
+     padding: 0 5px;
+   }
+
+   ion-buttons {
+     flex-wrap: wrap; /* Asegurar que los botones no se desborden */
+   }
+}
+
+.user-name {
+  font-size: 1rem;
+  color: #000;
+  font-weight: bold;
+  margin-right: 10px;
+}

@@ -1,0 +1,387 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="header-content ion-align-items-center">
+        <!-- Logo -->
+        <ion-col size="12" size-md="3" class="logo-column">
+          <ion-button fill="clear" (click)="navigateTo('home')" class="logo-button">
+            <img src="../../assets/icon/70c6a3b2-eab6-49bf-bb62-5941d24c60f7.jfif" alt="logo" class="logo" />
+          </ion-button>
+        </ion-col>
+
+        <!-- Navigation buttons (hidden on mobile) -->
+        <ion-col size="12" size-md="6" class="nav-buttons-column">
+          <ion-buttons class="nav-buttons">
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('managers')">Representantes</ion-button>
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('clubes')">Clubes</ion-button>
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('dts')">DT</ion-button>
+          </ion-buttons>
+        </ion-col>
+
+        <!-- Login and Register buttons (hidden on mobile) -->
+        <ion-col size="12" size-md="3" class="buttons-column">
+          <ion-buttons class="buttons-container">
+            <ion-button (click)="navigateTo('perfil')" class="login-button">PERFIL</ion-button>
+            <ion-button (click)="navigateTo('home')" class="start-button">FAQ</ion-button>
+          </ion-buttons>
+        </ion-col>
+
+        <!-- Hamburger menu (only visible on mobile) -->
+        <ion-col size="12" class="menu-hamburger-column">
+          <ion-menu-button auto-hide="false" class="menu-button"></ion-menu-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Sidebar menu -->
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item button (click)="navigateTo('managers')">Representantes</ion-item>
+      <ion-item button (click)="navigateTo('clubes')">Clubes</ion-item>
+      <ion-item button (click)="navigateTo('dts')">DT</ion-item>
+      <ion-item button (click)="navigateTo('perfil')">Perfil</ion-item>
+      <ion-item button (click)="navigateTo('home')">Faq</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content id="main-content">
+  <div class="perfil-cliente">
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="info">
+        <ion-label>Información</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="videos" *ngIf="userData?.tipo_usuario === 'player'">
+        <ion-label>Videos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="reviews">
+        <ion-label>Reseñas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="selectedSegment === 'info'" class="profile-section">
+      <div class="profile-header">
+        <img
+          *ngIf="userData?.profilePhotoUrl"
+          [src]="userData.profilePhotoUrl"
+          alt="Foto de Perfil"
+          class="profile-photo"
+        />
+        <span *ngIf="!userData?.profilePhotoUrl" class="no-photo">No disponible</span>
+        <h1 class="profile-title">
+          Perfil de {{ userData?.playerName || userData?.nombre || 'Usuario' }}
+        </h1>
+      </div>
+
+      <!-- Información de un Jugador -->
+      <div *ngIf="userData?.tipo_usuario === 'player'" class="info-container">
+          <div class="info-item">
+            <span class="label">Tipo de Jugador:</span>
+            <span>{{ userData?.playerType || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Preferencia de Pie:</span>
+            <span>{{ userData?.footPreference || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Posición:</span>
+            <span>{{ userData?.position || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">País:</span>
+            <span>{{ userData?.country || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Provincia:</span>
+            <span>{{ userData?.province || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Nombre del Jugador:</span>
+            <span>{{ userData?.playerName || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Último Club:</span>
+            <span>{{ userData?.lastClub || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Club Actual:</span>
+            <span>{{ userData?.currentClub || 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Edad:</span>
+            <span>{{ userData?.age !== null ? userData.age : 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Altura:</span>
+            <span>{{ userData?.height !== null ? userData.height + ' cm' : 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Años de Experiencia:</span>
+            <span>{{ userData?.yearsOfExperience !== null ? userData.yearsOfExperience : 'No disponible' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Detalle:</span>
+            <span>{{ userData?.detalle || 'No disponible' }}</span>
+          </div>
+      </div>
+
+      <!-- Información de un Club -->
+      <div *ngIf="userData?.tipo_usuario === 'club'" class="info-container">
+        <div class="info-item">
+          <span class="label">Nombre del Club:</span>
+          <span>{{ userData?.nombre || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Fundación:</span>
+          <span>{{ userData?.fundacion ? userData.fundacion : 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">País:</span>
+          <span>{{ userData?.country || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Provincia:</span>
+          <span>{{ userData?.province || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Edad del Club:</span>
+          <span>{{ userData?.age !== null ? userData.age + ' años' : 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Instagram:</span>
+          <span>
+            <a *ngIf="userData?.instagram" [href]="userData.instagram" target="_blank">
+              {{ userData.instagram }}
+            </a>
+            <span *ngIf="!userData?.instagram">No disponible</span>
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">Facebook:</span>
+          <span>
+            <a *ngIf="userData?.facebook" [href]="userData.facebook" target="_blank">
+              {{ userData.facebook }}
+            </a>
+            <span *ngIf="!userData?.facebook">No disponible</span>
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">Sitio Web:</span>
+          <span>
+            <a *ngIf="userData?.website" [href]="userData.website" target="_blank">
+              {{ userData.website }}
+            </a>
+            <span *ngIf="!userData?.website">No disponible</span>
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">Detalle:</span>
+          <span>{{ userData?.detalle || 'No disponible' }}</span>
+        </div>
+      </div>
+
+
+      <!-- Información de un Manager -->
+      <div *ngIf="userData?.tipo_usuario === 'manager'" class="info-container">
+        <div class="info-item">
+          <span class="label">Nombre del Manager:</span>
+          <span>{{ userData?.playerName || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Estado:</span>
+          <span>{{ userData?.manager || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">País:</span>
+          <span>{{ userData?.country || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Provincia:</span>
+          <span>{{ userData?.province || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Último Club:</span>
+          <span>{{ userData?.lastClub || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Club Actual:</span>
+          <span>{{ userData?.currentClub || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Edad:</span>
+          <span>{{ userData?.age !== null ? userData.age + ' años' : 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Años de Experiencia:</span>
+          <span>{{ userData?.yearsOfExperience !== null ? userData.yearsOfExperience + ' años' : 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Detalle:</span>
+          <span>{{ userData?.detalle || 'No disponible' }}</span>
+        </div>
+      </div>
+
+
+      <!-- Información de un DT -->
+      <div *ngIf="userData?.tipo_usuario === 'dt'" class="info-container">
+        <div class="info-item">
+          <span class="label">Nombre del DT:</span>
+          <span>{{ userData?.playerName || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Estado:</span>
+          <span>{{ userData?.dt || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Estilo de Juego:</span>
+          <span>{{ userData?.gusto || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">País:</span>
+          <span>{{ userData?.country || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Provincia:</span>
+          <span>{{ userData?.province || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Último Club:</span>
+          <span>{{ userData?.lastClub || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Club Actual:</span>
+          <span>{{ userData?.currentClub || 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Edad:</span>
+          <span>{{ userData?.age !== null ? userData.age + ' años' : 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Altura:</span>
+          <span>{{ userData?.height !== null ? userData.height + ' cm' : 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Años de Experiencia:</span>
+          <span>{{ userData?.yearsOfExperience !== null ? userData.yearsOfExperience + ' años' : 'No disponible' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Video:</span>
+          <span>
+            <a *ngIf="userData?.videoLink" [href]="userData.videoLink" target="_blank">
+              Ver Video
+            </a>
+            <span *ngIf="!userData?.videoLink">No disponible</span>
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="label">Detalle:</span>
+          <span>{{ userData?.detalle || 'No disponible' }}</span>
+        </div>
+      </div>
+
+
+      <!-- Mensaje para tipo de usuario desconocido -->
+      <div *ngIf="!userData?.tipo_usuario" class="info-container">
+              <p>El tipo de usuario no está definido o es desconocido.</p>
+      </div>
+    </div>
+
+    <div *ngIf="selectedSegment === 'videos'" class="videos-section">
+      <div *ngIf="videos && videos.length > 0; else noVideos">
+        <ion-card *ngFor="let video of videos" class="video-card">
+          <ion-card-header>
+            <ion-card-title>{{ video.title }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ video.description }}</p>
+            <iframe
+              [src]="video.safeUrl"
+              width="100%"
+              height="315"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <ng-template #noVideos>
+        <p>No hay videos disponibles para este jugador.</p>
+      </ng-template>
+
+    </div>
+
+
+
+
+    <div *ngIf="selectedSegment === 'reviews'" class="reviews-section">
+      <h2>Reseñas</h2>
+
+      <!-- Lista de reseñas -->
+      <div *ngIf="reviews && reviews.length > 0; else noReviews">
+        <div *ngFor="let review of reviews" class="review-item">
+          <div class="review-header">
+            <ion-icon name="star" *ngFor="let star of [].constructor(review.rating); let i = index"></ion-icon>
+          </div>
+          <p class="review-comment">{{ review.comment }}</p>
+        </div>
+      </div>
+      <ng-template #noReviews>
+        <p>No hay reseñas aún.</p>
+      </ng-template>
+
+      <!-- Formulario para agregar una nueva reseña -->
+      <div *ngIf="currentUser">
+        <h3>Dejar una reseña</h3>
+        <form (ngSubmit)="addReview()">
+          <ion-item>
+            <ion-label>Calificación</ion-label>
+            <ion-select [(ngModel)]="newReview.rating" name="rating" placeholder="Seleccione" required>
+              <ion-select-option *ngFor="let star of [1, 2, 3, 4, 5]" [value]="star">{{ star }} Estrellas</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Comentario</ion-label>
+            <ion-textarea [(ngModel)]="newReview.comment" name="comment" required></ion-textarea>
+          </ion-item>
+          <ion-button expand="block" type="submit" [disabled]="!newReview.rating || !newReview.comment">Enviar</ion-button>
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <br />
+  <br />
+
+  <ion-footer>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#" target="_blank"><i class="fab fa-twitter fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-youtube fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin fa-2x" style="color: #ff6600;"></i></a>
+      </div>
+
+      <div class="privacy-links">
+        <a href="#" style="color: #ff6600;">Políticas de privacidad</a>
+        <br />
+        <a href="#" style="color: #ff6600;">Términos y condiciones</a>
+      </div>
+    </div>
+  </ion-footer>
+</ion-content>

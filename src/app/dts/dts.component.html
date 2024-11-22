@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="header-content ion-align-items-center">
+        <!-- Logo -->
+        <ion-col size="12" size-md="3" class="logo-column">
+          <ion-button fill="clear" (click)="navigateTo('home')" class="logo-button">
+            <img src="../../assets/icon/70c6a3b2-eab6-49bf-bb62-5941d24c60f7.jfif" alt="logo" class="logo" />
+          </ion-button>
+        </ion-col>
+
+        <!-- Navigation buttons (hidden on mobile) -->
+        <ion-col size="12" size-md="6" class="nav-buttons-column">
+          <ion-buttons class="nav-buttons">
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('Jugadores')">Jugadores</ion-button>
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('managers')">Representantes</ion-button>
+            <ion-button fill="clear" class="nav-button" (click)="navigateTo('clubes')">Clubes</ion-button>
+                 
+
+          </ion-buttons>
+        </ion-col>
+
+        <!-- Login and Register buttons (hidden on mobile) -->
+        <ion-col size="12" size-md="3" class="buttons-column">
+          <ion-buttons class="buttons-container">
+            <ion-button (click)="navigateTo('perfil')" class="login-button">PERFIL</ion-button>
+            <ion-button (click)="navigateTo('home')" class="start-button">FAQ</ion-button>
+          </ion-buttons>
+        </ion-col>
+
+        <!-- Hamburger menu (only visible on mobile) -->
+        <ion-col size="12" class="menu-hamburger-column">
+          <ion-menu-button auto-hide="false" class="menu-button"></ion-menu-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Sidebar menu -->
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item button (click)="navigateTo('Jugadores')">Jugadores</ion-item>
+      <ion-item button (click)="navigateTo('managers')">Representantes</ion-item>
+      <ion-item button (click)="navigateTo('clubes')">Clubes</ion-item>
+      <!-- <ion-item button (click)="navigateTo('dts')">DT</ion-item> -->
+      <ion-item button (click)="navigateTo('perfil')">Perfil</ion-item>
+      <ion-item button (click)="navigateTo('q&a')">Faq</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+
+<ion-content id="main-content">
+  <div class="how-it-works">
+    <h1 class="gradient-text">Perfiles de Directores Tecnico</h1>
+  </div>
+
+
+
+ <!-- Contenedor de filtros -->
+  <div class="filters-container">
+    <!-- Filtros a la izquierda -->
+    <div class="left-filters">
+      <!-- Filtro de estado -->
+      <ion-segment [(ngModel)]="selectedStatus" (ionChange)="updateFilters()">
+        <ion-segment-button value="">Todos</ion-segment-button>
+        <ion-segment-button value="Activo">Activo</ion-segment-button>
+        <ion-segment-button value="Inactivo">Inactivo</ion-segment-button>
+      </ion-segment>
+
+<div class="boton" >
+      <ion-select [(ngModel)]="selectedStyle" placeholder="Estilo de Juego" (ionChange)="updateFilters()">
+        <ion-select-option value="">Todos</ion-select-option>
+        <ion-select-option value="Ofensivo">Ofensivo</ion-select-option>
+        <ion-select-option value="Defensivo">Defensivo</ion-select-option>
+        <ion-select-option value="Ambas">Ambas</ion-select-option>
+        <ion-select-option value="Depende">Depende</ion-select-option>
+      </ion-select>
+      </div>
+
+    </div>
+
+    <!-- Filtros a la derecha -->
+    <div class="right-filters">
+      <!-- Buscador -->
+      <ion-input placeholder="🔍 Buscador" [(ngModel)]="searchText" (ionInput)="updateFilters()"></ion-input>
+      <!-- Filtro de país -->
+      <ion-input placeholder="País" [(ngModel)]="selectedCountry" (ionInput)="updateFilters()"></ion-input>
+    </div>
+  </div>
+
+
+  <br />
+<!-- Contenedor de tarjetas de DTs -->
+<div class="players-container">
+  <!-- Muestra cada DT filtrado en una tarjeta -->
+  <div class="player-card" *ngFor="let dt of filteredDts">
+    <img [src]="dt.profilePhotoUrl || 'https://via.placeholder.com/300x200'" alt="{{ dt.playerName }}">
+    <div class="player-info">
+      <h3>{{ dt.playerName }}</h3>
+      <p><strong>Estado:</strong> {{ dt.dt }}</p>
+      <p><strong>Ubicación:</strong> {{ dt.country }} - {{ dt.province }}</p>
+      <p><strong>Experiencia:</strong> {{ dt.yearsOfExperience || 0 }} años</p>
+      <h4>Estilo de Juego</h4>
+      <p>{{ dt.gusto }}</p>
+      <h4>Último Club</h4>
+      <p>{{ dt.lastClub || 'No disponible' }}</p>
+      <h4>Club Actual</h4>
+      <p>{{ dt.currentClub || 'No disponible' }}</p>
+      <h4>Video</h4>
+      <p>
+        <a *ngIf="dt.videoLink" [href]="dt.videoLink" target="_blank">Ver Video</a>
+        <span *ngIf="!dt.videoLink">No disponible</span>
+      </p>
+      <p><strong>Detalles:</strong> {{ dt.detalle }}</p>
+    </div>
+    <div class="player-actions">
+      <!-- Botón para navegar al perfil del DT -->
+      <button [routerLink]="['/perfil-cliente', dt.userId]" class="view-profile-button">
+        Ver Perfil
+      </button>
+    </div>
+  </div>
+</div>
+
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <br />
+  <br />
+
+  <ion-footer>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#" target="_blank"><i class="fab fa-twitter fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-youtube fa-2x" style="color: #ff6600;"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin fa-2x" style="color: #ff6600;"></i></a>
+      </div>
+
+      <div class="privacy-links">
+        <a href="https://imawinterminos.vercel.app/" style="color: #ff6600;">Políticas de privacidad</a>
+        <br>
+        <a href="https://imawinterminos.vercel.app/" style="color: #ff6600;">Términos y condiciones</a>
+      </div>
+    </div>
+  </ion-footer>
+</ion-content>
